@@ -46,6 +46,9 @@ header h1 {
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .producto:hover {
@@ -53,17 +56,31 @@ header h1 {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.producto img {
+.imagen-container {
     width: 100%;
     height: 150px;
-    object-fit: cover;
-    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #f8f9fa;
     border: 2px solid #e0e0e0;
+}
+
+.producto img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
 }
 
 .info {
     padding: 10px 0;
+    width: 100%;
 }
 
 .codigo {
@@ -95,6 +112,13 @@ footer p {
     font-size: 1.1em;
 }
 
+/* Estilos para cuando no hay imagen */
+.imagen-container:empty::before {
+    content: "Sin imagen";
+    color: #999;
+    font-size: 0.9em;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .catalogo-grid {
@@ -108,6 +132,10 @@ footer p {
     
     .container {
         padding: 10px;
+    }
+    
+    .imagen-container {
+        height: 130px;
     }
 }
 
@@ -125,7 +153,18 @@ footer p {
         padding: 10px;
     }
     
-    .producto img {
-        height: 120px;
+    .imagen-container {
+        height: 110px;
     }
+}
+
+/* Para imágenes con diferentes proporciones */
+.producto.vertical img {
+    max-height: 140px;
+    max-width: 90%;
+}
+
+.producto.horizontal img {
+    max-width: 90%;
+    max-height: 140px;
 }
